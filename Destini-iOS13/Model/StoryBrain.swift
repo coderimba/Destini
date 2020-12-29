@@ -1,19 +1,17 @@
+//
+//  StoryBrain.swift
+//  Destini-iOS13
+//
+//  Created by Angela Yu on 08/08/2019.
+//  Copyright © 2019 The App Brewery. All rights reserved.
+//
 
-![App Brewery Banner](Documentation/AppBreweryBanner.png)
+import Foundation
 
-#  Destini
-
-## Our Goal
-
-The goal of this challenge is to get you comfortable with implementing the MVC design pattern and thinking about the state of your app. In addition, you will be reviewing the concept of Swift Structures and using it to separate the Model from the Controller. 
-
-## What you will create
-
-In this app, you will be creating a “choose your own adventure” game similar to the App Store hit “Life Line” app. The app will tell a story depending on what the user chooses and can be fleshed out and modified to provide an engaging story-telling experience
-
-
-## Story Strings
-```
+struct StoryBrain {
+    var storyNumber = 0
+    
+    let example = [
         Story(
             title: "Your car has blown a tire on a winding road in the middle of nowhere with no cell phone reception. You decide to hitchhike. A rusty pickup truck rumbles to a stop next to you. A man with a wide brimmed hat with soulless eyes opens the passenger door for you and asks: 'Need a ride, boy?'.",
             choice1: "I'll hop in. Thanks for the help!", choice1Destination: 2,
@@ -43,9 +41,26 @@ In this app, you will be creating a “choose your own adventure” game similar
             title: "You bond with the murderer while crooning verses of 'Can you feel the love tonight'. He drops you off at the next town. Before you go he asks you if you know any good places to dump bodies. You reply: 'Try the pier.'",
             choice1: "The", choice1Destination: 0,
             choice2: "End", choice2Destination: 0
-        )      
-```
-
->This is a companion project to The App Brewery's Complete App Development Bootcamp, check out the full course at [www.appbrewery.co](https://www.appbrewery.co/)
-
-![End Banner](Documentation/readme-end-banner.png)
+        )
+    ]
+    
+    mutating func nextStory(_ userChoice: String) {
+        if userChoice == getChoice1() {
+            storyNumber = example[storyNumber].choice1Destination
+        } else {
+            storyNumber = example[storyNumber].choice2Destination
+        }
+    }
+    
+    func getTitle() -> String {
+        return example[storyNumber].title
+    }
+    
+    func getChoice1() -> String {
+        return example[storyNumber].choice1
+    }
+    
+    func getChoice2() -> String {
+        return example[storyNumber].choice2
+    }
+}
